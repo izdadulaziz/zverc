@@ -161,7 +161,7 @@ void gen_folder(const std::string& name_project){
 
 }
 
-std::string pharse_arguments(const int argc, const char* argv[]){
+std::string parse_argument(const int argc, const char* argv[]){
             
 
     std::string argv0;
