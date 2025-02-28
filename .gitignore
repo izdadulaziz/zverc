@@ -1,3 +1,4 @@
 
-*.o
-zverc
+build/*.o
+
+bin/zverc
