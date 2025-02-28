@@ -43,7 +43,7 @@ void gen_template_file(const std::string& name_project){
         hello_file << "#include \"hello.h\"\n";
         hello_file << "void hello(){";
         hello_file << "    \n";
-        hello_file << "    std::cout << \"Hello World!\"";
+        hello_file << "    std::cout << \"Hello World!\" << std::endl;";
         hello_file << "    \n";
         hello_file << "}";
 
@@ -59,7 +59,7 @@ void gen_template_file(const std::string& name_project){
             
         header_hello << "#ifndef HELLO_H\n";
         header_hello << "#define HELLO_H\n\n";
-        header_hello << "void hello()\n";
+        header_hello << "void hello();\n";
         header_hello << "#endif // HELLO_H";
 
     }else{
@@ -83,9 +83,9 @@ void gen_make_file(const std::string& name_project){
         make_file << "CC = g++\n" << std::endl;
         make_file << "$(TARGET) : build/main.o build/hello.o" << std::endl;
         make_file << "\t$(CC) $^ -o $@\n" << std::endl;
-        make_file << "build/main.o : src/main.o include/hello.h" << std::endl;
+        make_file << "build/main.o : src/main.cpp include/hello.h" << std::endl;
         make_file << "\t$(CC) -Iinclude -c $< -o $@\n" << std::endl;
-        make_file << "build/hello.o : src/hello.o include/hello.h" << std::endl;
+        make_file << "build/hello.o : src/hello.cpp include/hello.h" << std::endl;
         make_file << "\t$(CC) -Iinclude -c $< -o $@\n" << std::endl;
         make_file << "clean :" << std::endl;
         make_file << "\trm -f $(TARGET) build/main.o build/hello.o" << std::endl;
