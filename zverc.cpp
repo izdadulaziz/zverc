@@ -79,7 +79,7 @@ void gen_make_file(const std::string& name_project){
 
     if(make_file){
 
-        make_file << "TARGET = bin/" << name_project << std::endl;
+         make_file << "TARGET = bin/hello" << std::endl;
         make_file << "CC = g++\n" << std::endl;
         make_file << "$(TARGET) : build/main.o build/hello.o" << std::endl;
         make_file << "\t$(CC) $^ -o $@\n" << std::endl;
