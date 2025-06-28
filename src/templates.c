@@ -7,14 +7,18 @@
 #include "status.h"
 
 Status create_file(char* fname, char* fcontent){
-	
-	FILE* file = fopen(fname, "w");
 
+    // open a file and the mode is write
+	FILE* file = fopen(fname, "w");
+    
+    // return STATUS_NULL if file isnull
 	if(file == NULL)
 		return STATUS_NULL;
-
+    
+    // write file
 	fprintf(file, "%s", fcontent);
 
+    //close file
 	fclose(file);
 
 	return STATUS_OK;
@@ -23,15 +27,17 @@ Status create_file(char* fname, char* fcontent){
 
 Status create_dir(char* dirname){
 	
+    // make directory 
 	int r = mkdir(dirname, 0777);
-	
+
+	// return STATUS_OK if success and return STATUS_ERROR if failed
 	return (r == 0) ? STATUS_OK : STATUS_ERROR;
 }
 
 Status template_main_c(char* project_name){
 
-	char fname[55];
-	char fcontent[150];
+	char fname[55]; // variable for store file name
+	char fcontent[150]; // variable for store content of file
 
 	snprintf(fname, sizeof(fname),
 			"%s/%s/main.c",
@@ -44,16 +50,18 @@ Status template_main_c(char* project_name){
 			"\treturn 0;\n"
 			"}");
 
+    // create file main.c
 	Status fresult = create_file(fname, fcontent);
-
+    
+    // return STATUS_OK if success and return STATUS_ERROR if failed
 	return (fresult == STATUS_OK) ? STATUS_OK : STATUS_ERROR;
 
 }
 
 Status template_main_cpp(char* project_name){
 
-	char fname[55];
-	char fcontent[150];
+	char fname[55]; // variable  for store file name 
+	char fcontent[150]; // variable for store content  of file 
 
 	snprintf(fname, sizeof(fname),
 			"%s/%s/main.cpp",
@@ -65,17 +73,18 @@ Status template_main_cpp(char* project_name){
 			"\tstd::cout << \"Hello world\" << std::endl;\n\n"
 			"\treturn 0;\n"
 			"}");
-
+    // create main.cpp
 	Status fresult = create_file(fname, fcontent);
 	
+    // return STATUS_OK if success and return STATUS_ERROR if failed
 	return (fresult == STATUS_OK) ? STATUS_OK : STATUS_ERROR;
 
 }
 
 Status template_makefile_c(char* project_name){
 
-	char fname[60];
-	char fcontent[300];
+	char fname[60]; // variable for store file name
+	char fcontent[300]; // variable  for  store file content
 
 	snprintf(fname, sizeof(fname),
 			"%s/Makefile",
@@ -94,16 +103,18 @@ Status template_makefile_c(char* project_name){
 			"clean :\n"
 			"\trm $(OBJFILE) $(TARGET)\n");
 
+    // create file Makefile
 	Status fresult = create_file(fname, fcontent);
 	
+    // return STATUS_OK if success and  return STATUS_ERROR if failed
 	return (fresult == STATUS_OK) ? STATUS_OK : STATUS_ERROR;
 }
 
 
 Status template_makefile_cpp(char* project_name){
 
-	char fname[60];
-	char fcontent[300];
+	char fname[60]; // variable for  store file name
+	char fcontent[300]; // variable for store file content
 
 	snprintf(fname, sizeof(fname),
 			"%s/Makefile",
@@ -121,9 +132,11 @@ Status template_makefile_cpp(char* project_name){
 			"\t$(CXX) -c $< -o $@\n\n"
 			"clean :\n"
 			"\trm $(OBJFILE) $(TARGET)\n");
-
+    
+    // create file Makefile
 	Status fresult = create_file(fname, fcontent);
-
+    
+    // return STATUS_OK if  success and return STATUS_ERROR if failed
 	return (fresult == STATUS_OK) ? STATUS_OK : STATUS_ERROR;
 
 }
@@ -131,10 +144,10 @@ Status template_makefile_cpp(char* project_name){
 Status template_dir(char* project_name){
 	
 
-	char dirsrc[50];
-	char dirbuild[50];
-	char dirbin[50];
-	char dirinclude[50];
+	char dirsrc[50]; // variable for store name of src directory
+	char dirbuild[50]; // variable for store name of build directory
+	char dirbin[50]; // variable for store name of bin directory
+	char dirinclude[50]; // variabe for store name of include directory
 
 	snprintf(dirsrc, sizeof(dirsrc),
 			"%s/%s/",
@@ -151,15 +164,23 @@ Status template_dir(char* project_name){
 	snprintf(dirinclude, sizeof(dirinclude), 
 			"%s/%s/",
 			project_name, INCLUDE_DIR);
-
+    
+    // create directory
 	Status root 	= create_dir(project_name);
 	Status src 		= create_dir(dirsrc);
 	Status build 	= create_dir(dirbuild);
 	Status bin 		= create_dir(dirbin);
 	Status include	= create_dir(dirinclude);
 	
+    // array of result create directory
 	Status arr_result[] = {root, src, build, bin, include};
 
+    /*
+     * check all item in arr_result
+     *
+     * if in arr_result have STATUS_ERROR return STATUS_ERROR
+     * if in arr_result don't have STATUS_ERROR return STATUS_OK
+     */
 	for(int i = 0; i < 4; i++){
 		if(arr_result[i] == STATUS_ERROR)
 			return STATUS_ERROR;

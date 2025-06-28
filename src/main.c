@@ -24,6 +24,8 @@ int main(int argc, char* argv[]){
 		print_example();
 
 	}else if(argument == STATUS_CREATE_C){
+
+        // create template for language c
 		Status rgen = generate_templates(argv[3], LANG_C);
 		
 		if(rgen == STATUS_OK)
@@ -32,6 +34,7 @@ int main(int argc, char* argv[]){
 			print_gen_failed(argv[3]);
 	}else if(argument == STATUS_CREATE_CPP){
 		
+        //  create template for language cpp
 		Status rgen = generate_templates(argv[3], LANG_CPP);
 
 		if(rgen == STATUS_OK)

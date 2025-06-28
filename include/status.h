@@ -2,6 +2,9 @@
 #ifndef STATUS_H
 #define STATUS_H
 
+/*
+ * enum for return type
+ * */
 typedef enum{
 	STATUS_OK,
 	STATUS_ERROR,
@@ -19,6 +22,10 @@ typedef enum{
 
 } Status;
 
+/*
+ *enum for type language
+ *
+ * */
 typedef enum{
 	LANG_C,
 	LANG_CPP
