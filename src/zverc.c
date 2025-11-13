@@ -86,9 +86,15 @@ Status generate_templates(char* project_name, Lang lang_type){
 }
 
 void print_help(){
-
-	 printf("USAGE :\n\tzverc [command] or zverc [command] [type] <PROJECT NAME>\n\n\tCOMMAND :\n\t\tcreate -> generate template\n\t\tversion -> print version \n\t\thelp -> print this\n\t\texample -> print how zverc use\n\tTYPE :\n\t\tc -> template c\n\t\tcpp -> template cpp\n");
-
+    
+    printf("USAGE: zverc <OPTION> OR zverc [OBJECT] [TYPE] <PROJECT NAME>\n");
+    printf("OPTION:\n");
+    printf("\thelp -> print this\n\tversion -> print version\n");
+    printf("OBJECT:\n");
+    printf("\tcreate -> generate template\n");
+    printf("TYPE:\n");
+    printf("\tc -> template c\n\tcpp -> template cpp\n");
+  
 }
 
 void print_invalid_argument(){
